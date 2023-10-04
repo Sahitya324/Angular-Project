@@ -29,9 +29,8 @@
       <th scope="col">S.No</th>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
-      <th scope="col">Category</th>
-      <th scope="col">Prompt</th>
-      <th scope="col">Locale</th>
+      <th scope="col">Created</th>
+      <th scope="col">Status</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -71,12 +70,6 @@
       <td routerLink="/templates/{{item.id}}">
         <ngb-highlight
           [result]="item.prompt"
-          [term]="filter.value"
-        ></ngb-highlight>
-      </td>
-      <td routerLink="/templates/{{item.id}}">
-        <ngb-highlight
-          [result]="item.locale"
           [term]="filter.value"
         ></ngb-highlight>
       </td>
