@@ -37,17 +37,7 @@
   <tbody>
     <tr *ngFor="let item of filteredData">
       <td routerLink="/templates/{{item.id}}">
-        <!-- <img
-          [src]="
-            'https://upload.wikimedia.org/wikipedia/commons/' + country.flag
-          "
-          class="me-2"
-          style="width: 20px"
-        /> -->
-        <ngb-highlight
-          [result]="item.id"
-          [term]="filter.value"
-        ></ngb-highlight>
+          {{item.id}}
       </td>
       <td routerLink="/templates/{{item.id}}">
         <ngb-highlight
@@ -56,22 +46,13 @@
         ></ngb-highlight>
       </td>
       <td routerLink="/templates/{{item.id}}">
-        <ngb-highlight
-          [result]="item.description"
-          [term]="filter.value"
-        ></ngb-highlight>
+          {{item.description}}
       </td>
       <td routerLink="/templates/{{item.id}}">
-        <ngb-highlight
-          [result]="item.category"
-          [term]="filter.value"
-        ></ngb-highlight>
+          {{item.category}}
       </td>
       <td routerLink="/templates/{{item.id}}">
-        <ngb-highlight
-          [result]="item.prompt"
-          [term]="filter.value"
-        ></ngb-highlight>
+          {{item.prompt}}
       </td>
       <td>
         <button
