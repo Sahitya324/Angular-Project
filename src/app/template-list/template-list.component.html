@@ -1,0 +1,164 @@
+<div class="p-5">
+  <div class="d-flex mb-5 justify-content-between align-items-center">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Search Template:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter"
+            (keyup)="searchData($event)"
+          />
+        </div>
+      </div>
+    </form>
+
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+      Create Template
+    </button>
+  </div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">S.No</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Prompt</th>
+      <th scope="col">Locale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of filteredData">
+      <td routerLink="/templates/{{item.id}}">
+        <!-- <img
+          [src]="
+            'https://upload.wikimedia.org/wikipedia/commons/' + country.flag
+          "
+          class="me-2"
+          style="width: 20px"
+        /> -->
+        <ngb-highlight
+          [result]="item.id"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+        <ngb-highlight
+          [result]="item.title"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+        <ngb-highlight
+          [result]="item.description"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+        <ngb-highlight
+          [result]="item.category"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+        <ngb-highlight
+          [result]="item.prompt"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+        <ngb-highlight
+          [result]="item.locale"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create Template</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="templateform">
+      <div class="form-group mb-3">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Title"
+          formControlName="title"
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Description"
+          formControlName="description"
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label for="category">Category</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Category"
+          formControlName="category"
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label for="prompt">Prompt</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Prompt"
+          formControlName="prompt"
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label for="locale">Locale</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Locale"
+          formControlName="locale"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.dismiss('Cancel')"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="addtemplate(this.templateform.value)"
+      [disabled]="this.templateform.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</ng-template>
+</div>
+

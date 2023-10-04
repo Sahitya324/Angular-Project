@@ -1,0 +1,52 @@
+{
+  "templates": [
+    {
+      "title": "Sahitya",
+      "description": "Do it Now!!",
+      "category": "Project",
+      "prompt": "Alert Beep !!!",
+      "locale": "IND",
+      "id": 1
+    },
+    {
+      "title": "Project2",
+      "description": "Crud ",
+      "category": "project",
+      "prompt": "Full Form",
+      "locale": "en",
+      "id": 2
+    },
+    {
+      "title": "Silver",
+      "description": "Going to....",
+      "category": "Project3",
+      "prompt": "Beep!!!!",
+      "locale": "en",
+      "id": 3
+    },
+    {
+      "title": "Back Point",
+      "description": "Backward!!!!",
+      "category": "Project4",
+      "prompt": "Alert!!!",
+      "locale": "en",
+      "id": 4
+    },
+    {
+      "title": "Test01",
+      "description": "testing...",
+      "category": "test",
+      "prompt": "do it !!",
+      "locale": "en",
+      "id": 5
+    },
+    {
+      "title": "1",
+      "description": "1",
+      "category": "1",
+      "prompt": "1",
+      "locale": "1",
+      "id": 6
+    }
+  ]
+}
