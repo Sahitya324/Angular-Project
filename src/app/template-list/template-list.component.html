@@ -32,6 +32,7 @@
       <th scope="col">Category</th>
       <th scope="col">Prompt</th>
       <th scope="col">Locale</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -78,6 +79,15 @@
           [result]="item.locale"
           [term]="filter.value"
         ></ngb-highlight>
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteTemplate(item.id)"
+        >
+        <i class="fas fa-trash"></i> Delete
+        </button>
       </td>
     </tr>
   </tbody>

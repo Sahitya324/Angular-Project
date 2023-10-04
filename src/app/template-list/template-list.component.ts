@@ -70,6 +70,10 @@ export class TemplateListComponent {
     })
   }
 
+  deleteTemplate(id: any) {
+    this.api.deleteTemplate(id).subscribe((res => {}))
+  }
+
   searchData(event: any) {
     const text = event.target.value;
     const term = text.toLowerCase();
