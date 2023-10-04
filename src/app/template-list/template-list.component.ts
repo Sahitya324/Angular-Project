@@ -71,7 +71,9 @@ export class TemplateListComponent {
   }
 
   deleteTemplate(id: any) {
-    this.api.deleteTemplate(id).subscribe((res => {}))
+    this.api.deleteTemplate(id).subscribe((res => {
+      this.gettemplate();
+    }))
   }
 
   searchData(event: any) {
