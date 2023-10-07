@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DecimalPipe, NgFor } from '@angular/common';
-import { NgbModal, ModalDismissReasons  } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DecimalPipe } from '@angular/common';
+import { Subject, Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 import { templateModel } from './model';
+
+import { ModalService } from '../modal.service';
 
 
 @Component({
@@ -20,47 +23,21 @@ export class TemplateListComponent {
 
   templateform!:FormGroup;
 
-	constructor(pipe: DecimalPipe,private modalService: NgbModal,private formbuilder:FormBuilder,private api:ApiService) { }
+  private searchTerm$ = new Subject<string>();
+
+	constructor(private api:ApiService,private modalService: ModalService) {
+    this.setupSearchSubscription();
+   }
 
   ngOnInit(): void {
-    this.templateform=this.formbuilder.group({
-      title:['',Validators.required],
-      description:['',Validators.required],
-      category:['',Validators.required],
-      prompt:['',Validators.required],
-      locale:['',Validators.required],
-    })
+    this.modalService.functionToBeCalled$.subscribe((data) => {
+      this.filteredData.push(data);
+    });
     this.gettemplate();
   }
 
-	open(content: any) {
-		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-			(result) => {
-				this.closeResult = `Closed with: ${result}`;
-			},
-			(reason) => {
-				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-			},
-		);
-	}
-
-	private getDismissReason(reason: any): string {
-		if (reason === ModalDismissReasons.ESC) {
-			return 'by pressing ESC';
-		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-			return 'by clicking on a backdrop';
-		} else {
-			return `with: ${reason}`;
-		}
-	}
-
-  addtemplate(data: any) {
-    // console.log(data, 'Template Data');
-    this.api.addTemplate(data).subscribe((res =>{
-      this.templateform.reset();
-      this.gettemplate();
-      this.modalService.dismissAll({ ariaLabelledBy: 'modal-basic-title' });
-    }))
+	openModalWithData(data: any) {
+    this.modalService.openModal(data);
   }
 
   gettemplate(){
@@ -70,20 +47,39 @@ export class TemplateListComponent {
     })
   }
 
-  deleteTemplate(id: any) {
+  deleteTemplate(event: Event, id: any) {
+    event.stopPropagation();
     this.api.deleteTemplate(id).subscribe((res => {
-      this.gettemplate();
+      this.filteredData = this.filteredData.filter((item: any) => item.id !== id);
     }))
   }
 
   searchData(event: any) {
     const text = event.target.value;
-    const term = text.toLowerCase();
+    this.searchTerm$.next(text);
+  }
+
+  private setupSearchSubscription() {
+    this.searchTerm$
+      .pipe(
+        debounceTime(100),
+        distinctUntilChanged(),
+        switchMap((term: string) => this.performSearch(term))
+      )
+      .subscribe((searchResults: any) => {
+        this.filteredData = searchResults;
+      });
+  }
+
+  private performSearch(term: string): Observable<any[]> {
     if (!this.data) {
-        this.data = [];
-      }
-    this.filteredData =  this.data.filter((item: any) => {
-        return item.title.toLowerCase().includes(term)
+      this.data = [];
+    }
+
+    const filteredData: any = this.data.filter((item: any) => {
+      return item.title.toLowerCase().includes(term.toLowerCase())
     });
+
+    return of(filteredData);
   }
 }

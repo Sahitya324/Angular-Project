@@ -1,3 +1,8 @@
+export interface ApiResponse {
+  status: string;
+  message: string;
+}
+
 export interface templateModel{
   id: string,
   title: string,
@@ -14,3 +19,12 @@ export interface templateListModal {
   created: string,
   status: string,
 }
+
+export interface templateCreate {
+  title: string,
+  description: string,
+  category: string,
+  prompt: string,
+  locale: string,
+}
+

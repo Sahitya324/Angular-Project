@@ -24,9 +24,10 @@ import {
   NgbModal,
   ModalDismissReasons,
 } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
-  declarations: [AppComponent, TemplateDetailComponent, TemplateListComponent],
+  declarations: [AppComponent, TemplateDetailComponent, TemplateListComponent, ModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

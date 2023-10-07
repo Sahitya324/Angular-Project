@@ -1,26 +1,18 @@
 {
   "templates": [
     {
-      "title": "Project2",
-      "description": "Crud ",
-      "category": "project",
-      "prompt": "Full Form",
-      "locale": "en",
-      "id": 2
-    },
-    {
-      "title": "Back Point",
-      "description": "Backward!!!!",
-      "category": "Project4",
-      "prompt": "Alert!!!",
+      "title": "Test04",
+      "description": "Testing04...",
+      "category": "Project Test04",
+      "prompt": "Test04 Completed!!!",
       "locale": "en",
       "id": 4
     },
     {
-      "title": "Test01",
-      "description": "testing...",
-      "category": "test",
-      "prompt": "do it !!",
+      "title": "Test05",
+      "description": "Testing05...",
+      "category": "Project Test05",
+      "prompt": "Test05 Completed!!",
       "locale": "en",
       "id": 5
     }
